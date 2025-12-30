@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Medicart — Cart</title>
+<style>
+    /* SAME STYLE */
+    :root{--accent:#0ea5a4;--bg:#0f1724;--muted:#94a3b8}
+    body{margin:0;background:linear-gradient(180deg,#071022,#071733);color:#e6eef6;font-family:Inter}
+    nav a{color:var(--muted);margin:0 10px;text-decoration:none;font-weight:600}
+    nav a.active{color:white}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+
+    #chatbotBtn{position:fixed;bottom:20px;right:20px;background:#00e5ff;color:#04202b;width:70px;height:70px;border-radius:50%;font-size:35px;display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:9999}
+    #chatWindow{position:fixed;bottom:110px;right:20px;width:300px;height:380px;background:#04131a;border-radius:12px;padding:12px;display:none;flex-direction:column;z-index:9999}
+    #chatWindow.open{display:flex}
+    .bot-msg{background:#003b48;padding:8px;border-radius:10px;margin:5px}
+    .user-msg{background:#005f73;padding:8px;border-radius:10px;margin:5px;text-align:right}
+    #voiceMic{background:#00e5ff;border:none;padding:10px;border-radius:10px;color:#04202b;margin-top:8px}
+  </style>
+  
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <img src="download.png" class="brand-logo" alt="Logo">
+    <div class="brand-name"><h1><b>Medicart</b></h1></div>
+</div>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html" class="active">Cart</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+</main>
+
+<!-- CHATBOT -->
+<div id="chatbotBtn">
+    <img src="chatbot.gif" alt="Chatbot" />
+</div>
+
+<div id="chatWindow">
+    <div id="chatMessages"></div>
+    <button id="voiceMic">🎤 Speak</button>
+</div>
+
+
+<script src="voice.js"></script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let box = document.getElementById("cartItems");
+
+cart.forEach(c => {
+  box.innerHTML += `
+    <div class="cart-item">
+      <b>${c.name}</b> — ₹${c.price}
+    </div>
+  `;
+});
+</script>
+
+</body>
+</html>
